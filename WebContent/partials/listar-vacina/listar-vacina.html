@@ -1,0 +1,174 @@
+<style>
+table { 
+		width: 100%; 
+		border-collapse: collapse; 
+	}
+	/* Zebra striping */
+	tr:nth-of-type(odd) { 
+		background: #eee; 
+	}
+	th { 
+		background: #333; 
+		color: white; 
+		font-weight: bold; 
+	}
+	td, th { 
+		padding: 6px; 
+		border: 1px solid #ccc; 
+		text-align: left; 
+	}
+/* 
+	Max width before this PARTICULAR table gets nasty
+	This query will take effect for any screen smaller than 760px
+	and also iPads specifically.
+	*/
+@media only screen and (max-width: 760px) , ( min-device-width : 768px)
+	and (max-device-width: 1024px) {
+	/* Force table to not be like tables anymore */
+	table,thead,tbody,th,td,tr {
+		display: block;
+	}
+
+	/* Hide table headers (but not display: none;, for accessibility) */
+	thead tr {
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+	tr {
+		border: 1px solid #ccc;
+	}
+	td {
+		/* Behave  like a "row" */
+		border: none;
+		border-bottom: 1px solid #eee;
+		position: relative;
+		padding-left: 50%;
+	}
+	td:before {
+		/* Now like a table header */
+		position: absolute;
+		/* Top/left values mimic padding */
+		top: 6px;
+		left: 6px;
+		width: 45%;
+		padding-right: 10px;
+		white-space: nowrap;
+	}
+
+	/*
+		Label the data
+		*/
+	td:nth-of-type(1):before {
+		content: "#";
+	}
+	td:nth-of-type(2):before {
+		content: "Nome";
+	}
+	td:nth-of-type(3):before {
+		content: "Lote";
+	}
+	td:nth-of-type(4):before {
+		content: "Data";
+	}
+	td:nth-of-type(5):before {
+		content: "Ação";
+	}
+	
+	
+}
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (min-device-width : 320px) and (max-device-width
+	: 480px) {
+	body {
+		padding: 0;
+		margin: 0;
+		width: 320px;
+	}
+}
+
+/* iPads (portrait and landscape) ----------- */
+@media only screen and (min-device-width: 768px) and (max-device-width:
+	1024px) {
+	body {
+		width: 495px;
+	}
+}
+</style>
+<!--<![endif]-->
+
+
+<meta charset="UTF-8">
+
+<div class="navbar navbar-inverse navbar-fixed-top">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse"
+				data-target=".navbar-collapse">
+				<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#">S.G.V</a>
+		</div>
+		<div class="collapse navbar-collapse">
+			<ul class="nav navbar-nav">
+				<li><a ng-href="#/main" href="#/main">Home</a></li>
+				<li><a ng-href="#/cad-vacina" href="#/cad-vacina">Cadastrar
+						Vacinas</a></li>
+				<li class="active"><a ng-href="#/listar-vacina"
+					href="#/listar-vacina">Listar Vacinas</a></li>
+				<li><a ng-href="#/" href="#/">Sair</a></li>
+
+			</ul>
+		</div>
+		<!--/.nav-collapse -->
+	</div>
+</div>
+
+<div class="container">
+
+	<div class="text-center">
+
+		<h3>Vacinas Cadastradas</h3>
+	</div>
+
+	<input type="text" class="form-control input-lg glyphicon glyphicon-search" aria-hidden="true" placeholder="Pesquisar" ng-model="filtro"><br />
+
+
+	<div id="page-wrap">
+
+		<table>
+			<thead>
+				<tr>
+				
+					<th>#</th>
+					<th>Vacina</th>
+					<th>Lote</th>
+					<th>Data</th>
+					<th>Ação</th>
+					
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="vacina in vacinas | orderBy: 'nome' | filter:filtro">
+					<td>{{ vacina.sequencial }}</td>
+					<td>{{ vacina.nome }}</td>
+					<td>{{ vacina.lote }}</td>
+					<td>{{ vacina.data }}</td>
+					<td><li ng-click="editar(vacina.sequencial);" class="glyphicon glyphicon-pencil"></li> | 
+					<li ng-click="excluir(vacina.sequencial);" class=" glyphicon glyphicon-remove"></li></td>
+					
+				</tr>
+				<tr>
+				<td>Total: {{ total }}</td>
+				</tr>
+
+			</tbody>
+		</table>
+
+	</div>
+
+</div>
+<!-- /.container -->
+<!-- script references -->

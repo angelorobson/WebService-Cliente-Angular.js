@@ -1,0 +1,17 @@
+  <meta charset="UTF-8">
+ <div class="text-center">
+
+		<h2>Cadastrar Usuário</h2>
+	</div>
+ <form ng-submit="salvarUsuario()">
+    
+    <input type="text" required="required" class="form-control input-lg" placeholder="Nome" ng-model="nome"/><br />
+    <input type="text" required="required" class="form-control input-lg" placeholder="Sobre Nome" ng-model="sobreNome"/><br />
+    <input type="email" class="form-control input-lg" placeholder="Email" required ng-model="email"/><br />
+    <input type="password" class="form-control input-lg" id="txtSenha" name="senha" type="password" required placeholder="Senha" title="Senha" ng-model="senha"/><br />
+    <input type="password" class="form-control input-lg" ng-model="repetirSenha" id="repetir_senha" name="repetir_senha" type="password" required  placeholder="Repetir Senha" title="Repetir Senha" oninput="validaSenha(this)"  /><br />
+    <button type="submit" class="btn btn-primary btn-lg btn-block" >Cadastrar</button><br />
+</form>
+<a class="centro" ng-href="#/" href="#/">Voltar</a>
+
+
